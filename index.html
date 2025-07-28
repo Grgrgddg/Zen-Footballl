@@ -27,6 +27,11 @@
       font-size: 20px;
       margin-top: 20px;
     }
+    #countdown {
+      font-size: 24px;
+      color: #ffcc00;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -34,6 +39,8 @@
 
   <p class="release-date">📆 موعد إطلاق النسخة التجريبية: <strong>10 أغسطس 2025</strong></p>
   <p class="release-date">📆 موعد إصدار النسخة الرسمية: <strong>10 سبتمبر 2025</strong></p>
+
+  <div id="countdown">جاري تحميل العد التنازلي...</div>
 
   <img src="zen-save.gif" alt="الحارس زين المهداوي يصد الكرة">
 
@@ -53,5 +60,28 @@
   <p class="description">
     ترقبوا المزيد قريباً! 🚀
   </p>
+
+  <script>
+    const countdownElement = document.getElementById("countdown");
+    const releaseDate = new Date("2025-08-10T00:00:00").getTime();
+
+    const timer = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = releaseDate - now;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        countdownElement.innerHTML = "🎉 النسخة التجريبية متاحة الآن! 🎉";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownElement.innerHTML = `العد التنازلي لإطلاق النسخة التجريبية: ${days} يوم ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
+    }, 1000);
+  </script>
 </body>
 </html>
